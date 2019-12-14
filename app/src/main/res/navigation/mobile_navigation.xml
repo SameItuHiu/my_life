@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_dashboard">
+
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:name="com.example.mylife.ui.dashboard.DashboardFragment"
+        android:label="@string/dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/nav_wallet"
+        android:name="com.example.mylife.ui.wallet.WalletFragment"
+        android:label="@string/wallet"
+        tools:layout="@layout/fragment_wallet" />
+
+    <fragment
+        android:id="@+id/nav_Weekly"
+        android:name="com.example.mylife.ui.schedule_weekly.ScheduleWeeklyFragment"
+        android:label="@string/weekly"
+        tools:layout="@layout/fragment_schedule_weekly" />
+
+    <fragment
+        android:id="@+id/nav_Friends_List"
+        android:name="com.example.mylife.ui.schedule_friends_list.FriendsListFragment"
+        android:label="@string/friends_list"
+        tools:layout="@layout/fragment_schedule_friends" />
+
+    <fragment
+        android:id="@+id/nav_Planning"
+        android:name="com.example.mylife.ui.schedule_planning.SchedulePlanningFragment"
+        android:label="@string/planning"
+        tools:layout="@layout/fragment_schedule_planning" />
+
+</navigation>

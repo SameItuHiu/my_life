@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">My Life</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="wallet">Wallet</string>
+    <string name="weekly">Weekly</string>
+    <string name="holiday">Holiday</string>
+    <string name="deadline">Deadline</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lets_started">Lets Started</string>
+    <string name="my_life">My Life</string>
+    <string name="history">History</string>
+    <string name="planning">Planning</string>
+    <string name="friends_list">Friends List</string>
+
+    <string-array name="Weekly">
+
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thusday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+
+    </string-array>
+
+</resources>

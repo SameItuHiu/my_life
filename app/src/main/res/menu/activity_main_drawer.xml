@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_dashboard"
+            android:title="@string/dashboard" />
+        <item
+            android:id="@+id/nav_wallet"
+            android:icon="@drawable/ic_account_balance_wallet"
+            android:title="@string/wallet" />
+        <item
+            android:id="@+id/nav_Friends_List"
+            android:icon="@drawable/ic_contacts_black_24dp"
+            android:title="@string/friends_list" />
+
+    </group>
+
+    <item android:title="Schedule">
+        <menu>
+            <item
+                android:id="@+id/nav_Weekly"
+                android:icon="@drawable/ic_calendar_weekly"
+                android:title="@string/weekly" />
+
+            <item
+                android:id="@+id/nav_Planning"
+                android:icon="@drawable/ic_deadline"
+                android:title="@string/planning" />
+        </menu>
+    </item>
+
+</menu>
