@@ -16,14 +16,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DBContractWallet.NoteColumns.saldo
     );
 
-    private static final String SQL_CREATE_TABLE_HISTORY = String.format("CREATE TABLE %s"
-                    + " (%s TEXT NOT NULL,"
-                    + " %s TEXT NOT NULL)",
-            DBContractHistoryTransaction.TABLE_NAME,
-            DBContractHistoryTransaction.NoteColumns.id_wallet,
-            DBContractHistoryTransaction.NoteColumns.id_transaksi
-    );
-
     private static final String SQL_CREATE_TABLE_INOUT = String.format("CREATE TABLE %s"
                     + " (%s TEXT PRIMARY KEY,"
                     + " %s TEXT NOT NULL,"
@@ -101,7 +93,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_WALLET);
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_INOUT);
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_SCHEDULE_WEEKLY);
-        sqLiteDatabase.execSQL(SQL_CREATE_TABLE_HISTORY);
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_FRIENDS);
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_CONTACT);
     }
@@ -111,7 +102,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DBContractWallet.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DBContractTransactionWallet.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DBContractScheduleWeekly.TABLE_NAME);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DBContractHistoryTransaction.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DBContractFriends.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DBContractContact.TABLE_NAME);
         onCreate(sqLiteDatabase);

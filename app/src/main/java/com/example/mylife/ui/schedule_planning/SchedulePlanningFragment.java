@@ -9,14 +9,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.mylife.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class SchedulePlanningFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_schedule_planning, container, false);
+        View v = inflater.inflate(R.layout.fragment_schedule_planning, container, false);
 
+        FloatingActionButton fab = v.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        return root;
+            }
+        });
+
+        return v;
     }
 }

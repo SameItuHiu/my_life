@@ -14,6 +14,7 @@
     <string name="history">History</string>
     <string name="planning">Planning</string>
     <string name="friends_list">Friends List</string>
+    <string name="schedule_weekly">Schedule Weekly</string>
 
     <string-array name="Weekly">
 

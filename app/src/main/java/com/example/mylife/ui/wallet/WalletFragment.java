@@ -1,11 +1,9 @@
 package com.example.mylife.ui.wallet;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +13,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.mylife.MainActivity;
-import com.example.mylife.dbhelper.DBContractHistoryTransaction;
 import com.example.mylife.dbhelper.DBContractWallet;
 import com.example.mylife.ui.wallet.fragment.InComingFragment;
 import com.example.mylife.ui.wallet.fragment.OutGoingFragment;
@@ -167,10 +162,6 @@ public class WalletFragment extends Fragment{
                             // updating row
                             dbWrite.update(DBContractWallet.TABLE_NAME, valuess,  " id_wallet = ?", new String[] {dataID});
 
-                            ContentValues valuesss = new ContentValues();
-                            valuesss.put(DBContractHistoryTransaction.NoteColumns.id_transaksi, ID);
-                            valuesss.put(DBContractHistoryTransaction.NoteColumns.id_wallet, dataID);
-                            dbWrite.insert(DBContractHistoryTransaction.TABLE_NAME,null,valuesss);
 
                             Toast.makeText(getContext(), "sukses", Toast.LENGTH_SHORT).show();
                             adapter.notifyDataSetChanged();
@@ -232,11 +223,6 @@ public class WalletFragment extends Fragment{
                             valuess.put(DBContractWallet.NoteColumns.saldo, MinSaldo);
                             // updating row
                             dbWrite.update(DBContractWallet.TABLE_NAME, valuess,  " id_wallet = ?", new String[] {dataID});
-
-                            ContentValues valuesss = new ContentValues();
-                            valuesss.put(DBContractHistoryTransaction.NoteColumns.id_transaksi, ID);
-                            valuesss.put(DBContractHistoryTransaction.NoteColumns.id_wallet, dataID);
-                            dbWrite.insert(DBContractHistoryTransaction.TABLE_NAME,null,valuesss);
 
                             Toast.makeText(getContext(), "Sukses", Toast.LENGTH_SHORT).show();
                             adapter.notifyDataSetChanged();

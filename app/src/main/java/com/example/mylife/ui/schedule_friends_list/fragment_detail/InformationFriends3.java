@@ -54,6 +54,10 @@ public class InformationFriends3 extends Fragment {
         tvAddress.setText(address);
 
         Button direct = v.findViewById(R.id.direct);
+        if (cursor.getString(7) == null){
+            direct.setVisibility(View.GONE);
+        }
+
         direct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

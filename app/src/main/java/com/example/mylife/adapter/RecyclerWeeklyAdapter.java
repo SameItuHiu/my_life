@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class RecyclerWeeklyAdapter extends RecyclerView.Adapter<RecyclerWeeklyAdapter.ListViewHolder>{
 
     private ArrayList<DataWeekly> list = new ArrayList<>();
-//    private OnItemClickCallback onItemClickCallback;
+    private OnItemClickCallback onItemClickCallback;
 
     public void setData(ArrayList<DataWeekly> items) {
         list.clear();
@@ -39,13 +39,13 @@ public class RecyclerWeeklyAdapter extends RecyclerView.Adapter<RecyclerWeeklyAd
         holder.tvPlace.setText(data.getPlace());
         holder.tvTime.setText(data.getTime());
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onItemClickCallback.onItemClicked(list.get(holder.getAdapterPosition()));
-//
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(list.get(holder.getAdapterPosition()));
+
+            }
+        });
     }
 
     @Override
@@ -64,12 +64,12 @@ public class RecyclerWeeklyAdapter extends RecyclerView.Adapter<RecyclerWeeklyAd
         }
     }
 
-//    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
-//        this.onItemClickCallback = onItemClickCallback;
-//    }
-//    public interface OnItemClickCallback {
-//        void onItemClicked(DataWeekly data);
-//    }
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
+    public interface OnItemClickCallback {
+        void onItemClicked(DataWeekly data);
+    }
 
 
 }
