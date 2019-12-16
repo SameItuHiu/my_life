@@ -43,13 +43,6 @@ public class RecyclerWalletAdapter extends RecyclerView.Adapter<RecyclerWalletAd
             holder.tvplurormin.setText("- Rp");
         }
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onItemClickCallback.onItemClicked(list.get(holder.getAdapterPosition()));
-//
-//            }
-//        });
     }
 
     @Override
@@ -58,24 +51,15 @@ public class RecyclerWalletAdapter extends RecyclerView.Adapter<RecyclerWalletAd
     }
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
-        TextView tvMoney, tvActivity, tvdateDay, tvdateMonth,tvplurormin;
+        TextView tvMoney, tvActivity, tvdateDay,tvplurormin;
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
             tvActivity = itemView.findViewById(R.id.dataActivity);
             tvMoney = itemView.findViewById(R.id.dataMoney);
-            tvdateDay = itemView.findViewById(R.id.dateDay);
-            tvdateMonth = itemView.findViewById(R.id.dateMonth);
+            tvdateDay = itemView.findViewById(R.id.date);
             tvplurormin = itemView.findViewById(R.id.textView5);
         }
     }
-
-//    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
-//        this.onItemClickCallback = onItemClickCallback;
-//    }
-//    public interface OnItemClickCallback {
-//        void onItemClicked(DataWallet data);
-//    }
-
 
 }

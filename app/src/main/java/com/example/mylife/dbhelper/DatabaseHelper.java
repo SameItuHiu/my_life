@@ -9,28 +9,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     private static final String SQL_CREATE_TABLE_WALLET = String.format("CREATE TABLE %s"
-                    + " (%s TEXT PRIMARY KEY," +
-                    " %s INTEGER NOT NULL)",
+                    + " (%s TEXT PRIMARY KEY,"
+                    + " %s INTEGER NOT NULL)",
             DBContractWallet.TABLE_NAME,
             DBContractWallet.NoteColumns.id_wallet,
             DBContractWallet.NoteColumns.saldo
     );
 
     private static final String SQL_CREATE_TABLE_HISTORY = String.format("CREATE TABLE %s"
-                    + " (%s TEXT NOT NULL," +
-                    " %s TEXT NOT NULL)",
+                    + " (%s TEXT NOT NULL,"
+                    + " %s TEXT NOT NULL)",
             DBContractHistoryTransaction.TABLE_NAME,
             DBContractHistoryTransaction.NoteColumns.id_wallet,
             DBContractHistoryTransaction.NoteColumns.id_transaksi
     );
 
     private static final String SQL_CREATE_TABLE_INOUT = String.format("CREATE TABLE %s"
-                    + " (%s TEXT PRIMARY KEY," +
-                    " %s TEXT NOT NULL," +
-                    " %s INTEGER NOT NULL," +
-                    " %s TEXT NOT NULL," +
-                    " %s TEXT NOT NULL," +
-                    " %s DATETIME NOT NULL)",
+                    + " (%s TEXT PRIMARY KEY,"
+                    + " %s TEXT NOT NULL,"
+                    + " %s INTEGER NOT NULL,"
+                    + " %s TEXT NOT NULL,"
+                    + " %s TEXT NOT NULL,"
+                    + " %s DATETIME NOT NULL)",
             DBContractTransactionWallet.TABLE_NAME,
             DBContractTransactionWallet.NoteColumns.id_transaksi,
             DBContractTransactionWallet.NoteColumns.activity,
@@ -56,10 +56,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_TABLE_FRIENDS = String.format("CREATE TABLE %s"
                     + " (%s TEXT PRIMARY KEY,"
-                    + " %s TEXT,"
-                    + " %s TEXT,"
                     + " %s TEXT NOT NULL,"
                     + " %s TEXT NOT NULL,"
+                    + " %s TEXT,"
                     + " %s TEXT,"
                     + " %s TEXT,"
                     + " %s TEXT,"
@@ -67,15 +66,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + " %s TEXT)",
             DBContractFriends.TABLE_NAME,
             DBContractFriends.NoteColumns.id_friends,
-            DBContractFriends.NoteColumns.id_hutang,
-            DBContractFriends.NoteColumns.id_location,
             DBContractFriends.NoteColumns.name,
             DBContractFriends.NoteColumns.status,
             DBContractFriends.NoteColumns.birthday,
             DBContractFriends.NoteColumns.description,
             DBContractFriends.NoteColumns.path_photo,
-            DBContractFriends.NoteColumns.no_handphone,
-            DBContractFriends.NoteColumns.email
+            DBContractFriends.NoteColumns.alamat,
+            DBContractFriends.NoteColumns.Latitude,
+            DBContractFriends.NoteColumns.Longitude
+    );
+
+    private static final String SQL_CREATE_TABLE_CONTACT = String.format("CREATE TABLE %s"
+                    + " (%s TEXT PRIMARY KEY,"
+                    + " %s TEXT,"
+                    + " %s TEXT,"
+                    + " %s TEXT,"
+                    + " %s TEXT,"
+                    + " %s TEXT)",
+            DBContractContact.TABLE_NAME,
+            DBContractContact.NoteColumns.id_contact,
+            DBContractContact.NoteColumns.id_friends,
+            DBContractContact.NoteColumns.phone,
+            DBContractContact.NoteColumns.email,
+            DBContractContact.NoteColumns.line,
+            DBContractContact.NoteColumns.whatsapp
     );
 
     public DatabaseHelper(Context context) {
@@ -89,6 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_SCHEDULE_WEEKLY);
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_HISTORY);
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE_FRIENDS);
+        sqLiteDatabase.execSQL(SQL_CREATE_TABLE_CONTACT);
     }
 
     @Override
@@ -98,6 +113,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DBContractScheduleWeekly.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DBContractHistoryTransaction.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DBContractFriends.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DBContractContact.TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 }

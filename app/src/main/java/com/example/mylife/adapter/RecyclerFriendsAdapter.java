@@ -1,13 +1,19 @@
 package com.example.mylife.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.mylife.R;
 import com.example.mylife.data.DataFriends;
 import com.example.mylife.data.DataWeekly;
@@ -33,10 +39,13 @@ public class RecyclerFriendsAdapter extends RecyclerView.Adapter<RecyclerFriends
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerFriendsAdapter.ListViewHolder holder, int position) {
-        DataFriends data = list.get(position);
+    public void onBindViewHolder(@NonNull final RecyclerFriendsAdapter.ListViewHolder holder, final int position) {
+
+        final DataFriends data = list.get(position);
         holder.tvName.setText(data.getName());
         holder.tvStatus.setText(data.getStatus());
+
+        Glide.with(holder.itemView.getContext()).load(String.valueOf(data.getPath_photo())).into(holder.imgPhoto);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,11 +63,13 @@ public class RecyclerFriendsAdapter extends RecyclerView.Adapter<RecyclerFriends
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvStatus;
+        ImageView imgPhoto;
 
         public ListViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.name);
             tvStatus = itemView.findViewById(R.id.status);
+            imgPhoto = itemView.findViewById(R.id.imgPhoto);
         }
     }
 

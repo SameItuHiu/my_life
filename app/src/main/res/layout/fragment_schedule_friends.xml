@@ -35,21 +35,13 @@
         android:layout_below="@id/tv2"
         android:background="#D1D1D1"/>
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_below="@id/line"
-            android:background="@drawable/shape_button"/>
-
 
     1<androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListFriends"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/searchView"/>
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/line"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

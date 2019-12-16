@@ -30,6 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
+        android:id="@+id/phone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -50,6 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView1" />
 
     <TextView
+        android:id="@+id/email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -69,6 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
+        android:id="@+id/line"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -88,6 +91,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <TextView
+        android:id="@+id/whatsapp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"

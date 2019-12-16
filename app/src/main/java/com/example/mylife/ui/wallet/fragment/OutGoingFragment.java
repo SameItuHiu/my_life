@@ -55,6 +55,7 @@ public class OutGoingFragment extends Fragment {
                 dataItems.setMoney(cursor.getString(2));
                 dataItems.setType(cursor.getString(3));
                 dataItems.setId_wallet(cursor.getString(4));
+                dataItems.setDate(cursor.getString(5));
                 walletItems.add(dataItems);
             } while (cursor.moveToNext());
         }

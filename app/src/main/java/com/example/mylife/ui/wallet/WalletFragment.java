@@ -127,24 +127,31 @@ public class WalletFragment extends Fragment{
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Random r = new Random();
-                        int numberID = r.nextInt(999);
-                        String ID = "TFW"+numberID;
+                        if (inComActv.getText().toString().isEmpty()){
+                            inComActv.setError("this field can't be blank");
+                        }else if (inCom.getText().toString().isEmpty()){
+                            inCom.setError("this field can't be blank");
+                        }else if (setDate.getText().toString().equals("Tap to set date")){
+                            setDate.setError("please set date");
+                        }else{
+                            Random r = new Random();
+                            int numberID = r.nextInt(999);
+                            String ID = "TFW"+numberID;
 
-                        final int saldo = Integer.parseInt(inCom.getText().toString());
+                            final int saldo = Integer.parseInt(inCom.getText().toString());
 
-                        final int pluSaldo = dataSaldo + saldo;
+                            final int pluSaldo = dataSaldo + saldo;
 
-                        Cursor cursor = dbRead.rawQuery("SELECT id_transaksi FROM transaksi WHERE id_transaksi = '" +
-                                ID + "'",null);
+                            Cursor cursor = dbRead.rawQuery("SELECT id_transaksi FROM transaksi WHERE id_transaksi = '" +
+                                    ID + "'",null);
 
-                        cursor.moveToFirst();
+                            cursor.moveToFirst();
 
-                        while (cursor.getCount()>0)
-                        {
-                            numberID = r.nextInt(999);
-                            ID = "TFW"+numberID;
-                        }
+                            while (cursor.getCount()>0)
+                            {
+                                numberID = r.nextInt(999);
+                                ID = "TFW"+numberID;
+                            }
                             ContentValues values = new ContentValues();
                             values.put(DBContractTransactionWallet.NoteColumns.id_transaksi, ID);
                             values.put(DBContractTransactionWallet.NoteColumns.activity, inComActv.getText().toString());
@@ -160,14 +167,15 @@ public class WalletFragment extends Fragment{
                             // updating row
                             dbWrite.update(DBContractWallet.TABLE_NAME, valuess,  " id_wallet = ?", new String[] {dataID});
 
-                        ContentValues valuesss = new ContentValues();
-                        valuesss.put(DBContractHistoryTransaction.NoteColumns.id_transaksi, ID);
-                        valuesss.put(DBContractHistoryTransaction.NoteColumns.id_wallet, dataID);
-                        dbWrite.insert(DBContractHistoryTransaction.TABLE_NAME,null,valuesss);
+                            ContentValues valuesss = new ContentValues();
+                            valuesss.put(DBContractHistoryTransaction.NoteColumns.id_transaksi, ID);
+                            valuesss.put(DBContractHistoryTransaction.NoteColumns.id_wallet, dataID);
+                            dbWrite.insert(DBContractHistoryTransaction.TABLE_NAME,null,valuesss);
 
-                        Toast.makeText(getContext(), "sukses", Toast.LENGTH_SHORT).show();
-                        adapter.notifyDataSetChanged();
-                        dialog.dismiss();
+                            Toast.makeText(getContext(), "sukses", Toast.LENGTH_SHORT).show();
+                            adapter.notifyDataSetChanged();
+                            dialog.dismiss();
+                        }
                     }
                 });
 
@@ -185,47 +193,55 @@ public class WalletFragment extends Fragment{
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Random r = new Random();
-                        int numberID = r.nextInt(999);
-                        String ID = "TFW"+numberID;
+                        if (inComActv.getText().toString().isEmpty()){
+                            inComActv.setError("this field can't be blank");
+                        }else if (inCom.getText().toString().isEmpty()){
+                            inCom.setError("this field can't be blank");
+                        }else if (setDate.getText().toString().equals("Tap to set date")){
+                            setDate.setError("please set date");
+                        }else {
+                            Random r = new Random();
+                            int numberID = r.nextInt(999);
+                            String ID = "TFW"+numberID;
 
-                        int saldo = Integer.parseInt(inCom.getText().toString());
-                        final int MinSaldo = dataSaldo - saldo;
+                            int saldo = Integer.parseInt(inCom.getText().toString());
+                            final int MinSaldo = dataSaldo - saldo;
 
-                        Cursor cursor = dbRead.rawQuery("SELECT id_transaksi FROM transaksi WHERE id_transaksi = '" +
-                                ID + "'",null);
+                            Cursor cursor = dbRead.rawQuery("SELECT id_transaksi FROM transaksi WHERE id_transaksi = '" +
+                                    ID + "'",null);
 
-                        cursor.moveToFirst();
+                            cursor.moveToFirst();
 
-                        while (cursor.getCount()>0)
-                        {
-                            numberID = r.nextInt(999);
-                            ID = "TFW"+numberID;
+                            while (cursor.getCount()>0)
+                            {
+                                numberID = r.nextInt(999);
+                                ID = "TFW"+numberID;
+                            }
+
+                            ContentValues values = new ContentValues();
+                            values.put(DBContractTransactionWallet.NoteColumns.id_transaksi, ID);
+                            values.put(DBContractTransactionWallet.NoteColumns.activity, inComActv.getText().toString());
+                            values.put(DBContractTransactionWallet.NoteColumns.money, saldo);
+                            values.put(DBContractTransactionWallet.NoteColumns.type, "outgoing");
+                            values.put(DBContractTransactionWallet.NoteColumns.id_wallet, dataID);
+                            values.put(DBContractTransactionWallet.NoteColumns.date, setDate.getText().toString());
+                            dbWrite.insert(DBContractTransactionWallet.TABLE_NAME,null,values);
+
+                            //update saldo form table wallet
+                            ContentValues valuess = new ContentValues();
+                            valuess.put(DBContractWallet.NoteColumns.saldo, MinSaldo);
+                            // updating row
+                            dbWrite.update(DBContractWallet.TABLE_NAME, valuess,  " id_wallet = ?", new String[] {dataID});
+
+                            ContentValues valuesss = new ContentValues();
+                            valuesss.put(DBContractHistoryTransaction.NoteColumns.id_transaksi, ID);
+                            valuesss.put(DBContractHistoryTransaction.NoteColumns.id_wallet, dataID);
+                            dbWrite.insert(DBContractHistoryTransaction.TABLE_NAME,null,valuesss);
+
+                            Toast.makeText(getContext(), "Sukses", Toast.LENGTH_SHORT).show();
+                            adapter.notifyDataSetChanged();
+                            dialog.dismiss();
                         }
-
-                        ContentValues values = new ContentValues();
-                        values.put(DBContractTransactionWallet.NoteColumns.id_transaksi, ID);
-                        values.put(DBContractTransactionWallet.NoteColumns.activity, inComActv.getText().toString());
-                        values.put(DBContractTransactionWallet.NoteColumns.money, saldo);
-                        values.put(DBContractTransactionWallet.NoteColumns.type, "outgoing");
-                        values.put(DBContractTransactionWallet.NoteColumns.id_wallet, dataID);
-                        values.put(DBContractTransactionWallet.NoteColumns.date, setDate.getText().toString());
-                        dbWrite.insert(DBContractTransactionWallet.TABLE_NAME,null,values);
-
-                        //update saldo form table wallet
-                        ContentValues valuess = new ContentValues();
-                        valuess.put(DBContractWallet.NoteColumns.saldo, MinSaldo);
-                        // updating row
-                        dbWrite.update(DBContractWallet.TABLE_NAME, valuess,  " id_wallet = ?", new String[] {dataID});
-
-                        ContentValues valuesss = new ContentValues();
-                        valuesss.put(DBContractHistoryTransaction.NoteColumns.id_transaksi, ID);
-                        valuesss.put(DBContractHistoryTransaction.NoteColumns.id_wallet, dataID);
-                        dbWrite.insert(DBContractHistoryTransaction.TABLE_NAME,null,valuesss);
-
-                        Toast.makeText(getContext(), "Sukses", Toast.LENGTH_SHORT).show();
-                        adapter.notifyDataSetChanged();
-                        dialog.dismiss();
                     }
                 });
 

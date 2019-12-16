@@ -28,6 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
+        android:id="@+id/address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -40,10 +41,11 @@
         app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <Button
+        android:id="@+id/direct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFAB40"
-        android:text="My Friend's House"
+        android:text="Open Google Maps"
         android:textAllCaps="false"
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"

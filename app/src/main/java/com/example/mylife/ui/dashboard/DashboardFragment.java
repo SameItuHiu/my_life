@@ -56,7 +56,7 @@ public class DashboardFragment extends Fragment {
         }else if(DAY_OF_WEEK == 7){
             nameOfDay = "Saturday";
         }
-        String Date = nameOfDay + ", " + DAY_OF_MONTH +" "+ MONTH +" "+ YEAR;
+        String Date = nameOfDay + ", " + DAY_OF_MONTH +"/"+ MONTH +"/"+ YEAR;
         currentDate.setText(Date);
 
         Random r = new Random();

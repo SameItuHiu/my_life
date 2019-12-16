@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mylife.R;
 import com.example.mylife.adapter.RecyclerFriendsAdapter;
 import com.example.mylife.data.DataFriends;
+import com.example.mylife.dbhelper.DBContractContact;
 import com.example.mylife.dbhelper.DBContractFriends;
 import com.example.mylife.dbhelper.DatabaseHelper;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -39,6 +41,38 @@ public class FriendsListFragment extends Fragment {
         final SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
         final SQLiteDatabase dbRead = dbHelper.getReadableDatabase();
 
+        final ArrayList<DataFriends> FriendsItems = new ArrayList<>();
+
+        RecyclerView recyclerView = v.findViewById(R.id.rvListFriends);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        final Cursor cursor = dbRead.rawQuery("select * from friends where status != '' ", null);
+
+        if (cursor.moveToFirst()){
+            do {
+                DataFriends dataItems = new DataFriends();
+                dataItems.setId_friends(cursor.getString(0));
+                dataItems.setName(cursor.getString(1));
+                dataItems.setStatus(cursor.getString(2));
+                dataItems.setPath_photo(cursor.getString(5));
+                FriendsItems.add(dataItems);
+            } while (cursor.moveToNext());
+        }
+
+        final RecyclerFriendsAdapter adapter = new RecyclerFriendsAdapter();
+        adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);
+        adapter.setData(FriendsItems);
+
+        adapter.setOnItemClickCallback(new RecyclerFriendsAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(DataFriends data) {
+                Intent intent = new Intent(getContext(), FriendlistDetail.class);
+                intent.putExtra(FriendlistDetail.EXTRA_DATA, data);
+                startActivity(intent);
+            }
+        });
+
         FloatingActionButton fab = v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +82,6 @@ public class FriendsListFragment extends Fragment {
                 final TextView name = view1.findViewById(R.id.name);
                 final TextView status = view1.findViewById(R.id.status);
                 final TextView desc = view1.findViewById(R.id.desc);
-
 
                 final BottomSheetDialog dialog = new BottomSheetDialog(getContext());
                 dialog.setContentView(view1);
@@ -83,8 +116,14 @@ public class FriendsListFragment extends Fragment {
                             values.put(DBContractFriends.NoteColumns.name, name.getText().toString());
                             values.put(DBContractFriends.NoteColumns.status, status.getText().toString());
                             values.put(DBContractFriends.NoteColumns.id_friends, ID);
+                            values.put(DBContractFriends.NoteColumns.description, desc.getText().toString());
                             dbWrite.insert(DBContractFriends.TABLE_NAME,null,values);
 
+                            ContentValues valuess = new ContentValues();
+                            valuess.put(DBContractContact.NoteColumns.id_friends, ID);
+                            dbWrite.insert(DBContractContact.TABLE_NAME,null,valuess);
+
+                            dialog.dismiss();
                             Toast.makeText(getContext(), "Congrats you already have a friend", Toast.LENGTH_SHORT).show();
                         }
 
@@ -92,36 +131,7 @@ public class FriendsListFragment extends Fragment {
                 });
             }
         });
-        final ArrayList<DataFriends> FriendsItems = new ArrayList<>();
 
-        RecyclerView recyclerView = v.findViewById(R.id.rvListFriends);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        final Cursor cursor = dbRead.rawQuery("select * from friends where status != '' ", null);
-
-        if (cursor.moveToFirst()){
-            do {
-                DataFriends dataItems = new DataFriends();
-                dataItems.setId_friends(cursor.getString(0));
-                dataItems.setName(cursor.getString(3));
-                dataItems.setStatus(cursor.getString(4));
-                FriendsItems.add(dataItems);
-            } while (cursor.moveToNext());
-        }
-
-        final RecyclerFriendsAdapter adapter = new RecyclerFriendsAdapter();
-        adapter.notifyDataSetChanged();
-        recyclerView.setAdapter(adapter);
-        adapter.setData(FriendsItems);
-
-        adapter.setOnItemClickCallback(new RecyclerFriendsAdapter.OnItemClickCallback() {
-            @Override
-            public void onItemClicked(DataFriends data) {
-                Intent intent = new Intent(getContext(), FriendlistDetail.class);
-                intent.putExtra(FriendlistDetail.EXTRA_DATA, data);
-                startActivity(intent);
-            }
-        });
         return v;
     }
 }

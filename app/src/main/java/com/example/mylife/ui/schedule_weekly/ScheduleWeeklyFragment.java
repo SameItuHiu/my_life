@@ -122,31 +122,39 @@ public class ScheduleWeeklyFragment extends Fragment {
                     public void onClick(View view) {
                         String setWeekly = String.valueOf(Weekly.getSelectedItem());
 
-                        Random r = new Random();
-                        int numberID = r.nextInt(1000);
-                        String ID = "WKLY"+numberID;
+                        if (Activity.getText().toString().isEmpty()){
+                            Activity.setError("");
+                        }else if (Place.getText().toString().isEmpty()){
+                            Place.setError("");
+                        }else if (setTime.getText().toString().equals("00:00")){
+                            setTime.setError("please set a time");
+                        }else{
+                            Random r = new Random();
+                            int numberID = r.nextInt(1000);
+                            String ID = "WKLY"+numberID;
 
-                        Cursor cursor = dbRead.rawQuery("SELECT id_weekly FROM schedule_weekly WHERE id_weekly = '" +
-                                ID + "'",null);
+                            Cursor cursor = dbRead.rawQuery("SELECT id_weekly FROM schedule_weekly WHERE id_weekly = '" +
+                                    ID + "'",null);
 
-                        cursor.moveToFirst();
-                        while (cursor.getCount()>0)
-                        {
-                            numberID = r.nextInt(1000);
-                            ID = "WKLY"+numberID;
+                            cursor.moveToFirst();
+                            while (cursor.getCount()>0)
+                            {
+                                numberID = r.nextInt(1000);
+                                ID = "WKLY"+numberID;
+                            }
+
+                            ContentValues values = new ContentValues();
+                            values.put(DBContractScheduleWeekly.NoteColumns.id_weekly, ID);
+                            values.put(DBContractScheduleWeekly.NoteColumns.day, setWeekly);
+                            values.put(DBContractScheduleWeekly.NoteColumns.time, setTime.getText().toString());
+                            values.put(DBContractScheduleWeekly.NoteColumns.activity, Activity.getText().toString());
+                            values.put(DBContractScheduleWeekly.NoteColumns.place, Place.getText().toString());
+                            dbWrite.insert(DBContractScheduleWeekly.TABLE_NAME,null,values);
+
+                            Toast.makeText(getContext(), setWeekly, Toast.LENGTH_SHORT).show();
+                            adapter.notifyDataSetChanged();
+                            dialog.dismiss();
                         }
-
-                        ContentValues values = new ContentValues();
-                        values.put(DBContractScheduleWeekly.NoteColumns.id_weekly, ID);
-                        values.put(DBContractScheduleWeekly.NoteColumns.day, setWeekly);
-                        values.put(DBContractScheduleWeekly.NoteColumns.time, setTime.getText().toString());
-                        values.put(DBContractScheduleWeekly.NoteColumns.activity, Activity.getText().toString());
-                        values.put(DBContractScheduleWeekly.NoteColumns.place, Place.getText().toString());
-                        dbWrite.insert(DBContractScheduleWeekly.TABLE_NAME,null,values);
-
-                        Toast.makeText(getContext(), setWeekly, Toast.LENGTH_SHORT).show();
-                        adapter.notifyDataSetChanged();
-                        dialog.dismiss();
                     }
 
                 });
