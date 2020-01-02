@@ -13,7 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".map"></activity>
+        <receiver
+            android:name=".ReminderReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <activity
+            android:name=".Settings"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".map" />
         <activity android:name=".ui.schedule_friends_list.FriendlistDetail" />
         <activity
             android:name=".MainActivity"

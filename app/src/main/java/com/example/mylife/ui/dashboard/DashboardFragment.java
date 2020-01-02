@@ -108,6 +108,13 @@ public class DashboardFragment extends Fragment {
         TextView saldoWallet = root.findViewById(R.id.saldoWallet);
         saldoWallet.setText(String.valueOf(dataSaldo));
 
+        adapter.setOnItemClickCallback(new RecyclerWeeklyAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(DataWeekly data) {
+
+            }
+        });
+
         return root;
     }
 }
